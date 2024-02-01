@@ -190,6 +190,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
         {!!members?.length && (
           <div className="mb-2">
             <ServerSection
+            channelType={ChannelType.TEXT}
               sectionType="members"
               role={role}
               lable="Members"
