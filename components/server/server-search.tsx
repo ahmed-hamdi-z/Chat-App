@@ -1,20 +1,18 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 import {
-    Command,
     CommandDialog,
     CommandEmpty,
     CommandGroup,
     CommandInput,
     CommandItem,
     CommandList,
-    CommandSeparator,
-    CommandShortcut,
   } from "@/components/ui/command"
-  
+
 
 interface ServerSearchProps{
     data: {
@@ -32,6 +30,33 @@ export const ServerSearch = ({
     data
 }: ServerSearchProps) => {
     const [ open, setOpen ] = useState(false);
+    const router = useRouter();
+    const params = useParams();
+
+    useEffect(() => {
+        const keyShow = (e: KeyboardEvent) => {
+            if(e.key === "k" && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault();
+                setOpen((open) => !open)
+            }
+        }
+            document.addEventListener("keydown", keyShow);
+            return () => document.removeEventListener("keydown", keyShow)
+        
+    }, [])
+
+    const onClick = ({ id, type}: { id: string, type: "channel" | "member"}) => {
+        setOpen(false);
+
+        if(type === "member") {
+            return router.push(`/servers/${params?.serverId}/conversations/${id}`)
+        }
+
+        if(type === "channel") {
+            return router.push(`/servers/${params?.serverId}/channels/${id}`)
+        }
+    }
+
     return ( 
         <>
         <button  
@@ -61,7 +86,7 @@ export const ServerSearch = ({
                         <CommandGroup key={lable} heading={lable} >
                             {data?.map(({ id, icon, name}) => {
                                 return (
-                                    <CommandItem key={id}>
+                                    <CommandItem key={id} onSelect={() => onClick({ id, type})} >
                                         {icon}
                                         <span>{name}</span>
                                     </CommandItem>

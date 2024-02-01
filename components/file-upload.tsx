@@ -12,7 +12,7 @@ interface FileUploadeProps {
   value: string;
   endpoint: "messageFile" | "serverImage";
 }
-export const FileUploade = ({
+export const FileUpload = ({
   onChange,
   value,
   endpoint,

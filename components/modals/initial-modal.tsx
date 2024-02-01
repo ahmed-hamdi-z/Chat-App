@@ -26,7 +26,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { FileUploade } from "@/components/file-uploade";
+import { FileUpload } from "@/components/file-upload";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -73,7 +73,7 @@ export const InitialModal = () => {
   }
   return (
     <Dialog open>
-      <DialogContent className=" bg-white text-black p-0 overflow-hidden ">
+      <DialogContent className=" bg-transperent shadow-zinc-900 border-0 text-white p-0 overflow-hidden ">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className=" text-2xl text-center font-bold ">
           Create your server 
@@ -92,10 +92,10 @@ export const InitialModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <FileUploade 
+                        <FileUpload 
                         endpoint="serverImage"
                         value={field.value}
-                        onChange={field.onChange}
+                        onChange={field.onChange}  
                          />
                       </FormControl>
                     </FormItem>

@@ -27,7 +27,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { FileUploade } from "@/components/file-uploade";
+import { FileUpload } from "@/components/file-upload";
 
 
 const formSchema = z.object({
@@ -93,7 +93,7 @@ export const CreateServerModal = () => {
                   render={({ field }) => (
                     <FormItem className=" rounded-lg ">
                       <FormControl >
-                        <FileUploade 
+                        <FileUpload 
                         
                         endpoint="serverImage"
                         value={field.value}
